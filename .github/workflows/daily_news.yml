@@ -2,9 +2,9 @@ name: Daily News Push
 
 on:
   schedule:
-    # 每天香港時間 08:00 自動發送 (對應 UTC 00:00)
+    # 每天香港時間 08:00 自動執行 (UTC 00:00)
     - cron: '0 0 * * *'
-  workflow_dispatch: # 允許你隨時手動按按鈕測試
+  workflow_dispatch: # 支援手動一鍵測試
 
 jobs:
   run-bot:
@@ -23,5 +23,6 @@ jobs:
 
       - name: 執行新聞推送腳本
         env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python news_bot.py
